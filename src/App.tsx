@@ -1,17 +1,11 @@
 import React from 'react'
 import './App.sass'
-import Scheduler from './components/scheduler/Scheduler'
+import SchedulerHandler from './pages/scheduler/schedulerHandler'
 
 function App(): React.ReactNode {
   return (
-    <div
-      style={{
-        height: '70vh',
-        width: '70vw',
-        backgroundColor: '#202020',
-      }}
-    >
-      <Scheduler></Scheduler>
+    <div>
+      <SchedulerHandler QuaterListLink="https://raw.githubusercontent.com/devhoodit/semianrs/main/public/seminars/seminar.json"></SchedulerHandler>
     </div>
   )
 }
