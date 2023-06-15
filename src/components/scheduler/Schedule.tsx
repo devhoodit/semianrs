@@ -39,9 +39,6 @@ class Schedule extends Component<ScheduleProps, any> {
         const tbottom = this.props.data.get(conditionDate.getTime()) ?? []
         const lectureIds = this.props.data.get(sectionDate.getTime()) ?? []
 
-        console.log(`${sectionDate.getDate()} ${lectureIds.join(' ')}`)
-        console.log(this.props.data.get(sectionDate.getTime()))
-
         let right: string[] = []
         let bottom: string[] = []
         right = right.concat(

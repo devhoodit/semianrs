@@ -3,7 +3,7 @@
     {
       "name": "reinforce",
       "outFocusedColor": "red",
-      "inFocuesdColor": "blue",
+      "inFocusedColor": "blue",
       "date": ["2023-6-11"],
       "description": "rl seminar description",
       "organizer": "rl lover"
@@ -11,7 +11,7 @@
     {
       "name": "machine learning",
       "outFocusedColor": "green",
-      "inFocuesdColor": "yellow",
+      "inFocusedColor": "yellow",
       "date": ["2023-7-5"],
       "description": "ml seminar description",
       "organizer": "ml lover"

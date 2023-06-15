@@ -6,7 +6,9 @@ function App(): React.ReactNode {
   return (
     <div
       style={{
-        height: '100vh',
+        height: '70vh',
+        width: '70vw',
+        backgroundColor: '#202020',
       }}
     >
       <Scheduler></Scheduler>
