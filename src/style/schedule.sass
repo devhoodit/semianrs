@@ -1,0 +1,41 @@
+@import '../Color'
+
+*
+    box-sizing: content-box
+
+.schedule
+    -ms-overflow-style: none
+    scrollbar-width: none
+    &::-webkit-scrollbar
+        display: none
+    
+    height: 100%
+    overflow: hidden scroll
+    background-color: $background-color
+    display: flex
+    flex-direction: column
+
+    
+
+    &-week
+        display: flex
+        flex-direction: row
+        flex-shrink: 0
+        height: 90px
+
+    &-day
+        width: 14.28%
+        height: 100%
+        background-color: #ffffff00
+        color: #3e3e3e
+        transition: all .3s
+        border-right: solid 2px #3e3e3e
+        border-bottom: solid 2px #3e3e3e
+        opacity: 1
+
+.focused-lecture
+    color: $color
+    border-right-color: #ffffff00
+    border-left-color: #ffffff00
+    border-top-color: #ffffff00
+    border-bottom-color: #ffffff00
