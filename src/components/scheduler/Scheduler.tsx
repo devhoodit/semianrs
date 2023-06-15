@@ -91,14 +91,14 @@ class Scheduler extends Component<any, SchedulerState> {
       //  wait
       return (
         <div className="seminar__scheduler fetch-waiting">
-          <p>Waiting for Fetch Quater List</p>
+          <p className="header">Waiting for Fetch Quater List</p>
         </div>
       )
     } else if (this.state.fetchState === FetchState.Ok) {
       if (this.state.curFetchState === FetchState.Wait) {
         return (
           <div className="seminar__scheduler fetch-waiting">
-            Waiting for Fetch Quater
+            <p className="header">Waiting for Fetching Quater</p>
           </div>
         )
       } else if (this.state.curFetchState === FetchState.Ok) {
@@ -111,6 +111,7 @@ class Scheduler extends Component<any, SchedulerState> {
             ...(data.get(tmpDate.getTime()) ?? []),
             info.name.replace(' ', ''),
           ])
+          console.log(info)
           colors.set(info.name.replace(' ', ''), [
             info.outFocusedColor,
             info.inFocusedColor,
@@ -131,7 +132,9 @@ class Scheduler extends Component<any, SchedulerState> {
       } else {
         return (
           <div className="seminar__scheduler fetch-fail">
-            Fail to Fetch Quater
+            <p className="header">Fail to Fetch Quater</p>
+            <p>Sorry, loading information failed</p>
+            <p>If you want some help, please contact to us</p>
           </div>
         )
       }
@@ -139,7 +142,9 @@ class Scheduler extends Component<any, SchedulerState> {
       //  fail
       return (
         <div className="seminar__scheduler fetch-fail">
-          Fail to Fetching Quater List
+          <p className="header">Fail to Fetching Quater List</p>
+          <p>Sorry, loading information failed</p>
+          <p>If you want some help, please contact to us</p>
         </div>
       )
     }
