@@ -2,9 +2,13 @@ import { Component, type ReactNode } from 'react'
 import '../../style/calendar.sass'
 import RightNavigation from './rightNavigation'
 import Detail from './detail'
+import LeftNavigation from './leftNavigation'
 
 interface CalendarProps {
   data: any
+  quaterList: string[]
+  curQuater: string
+  changeQuater: (quaterId: string) => void
 }
 
 interface CalendarState {
@@ -199,7 +203,11 @@ class Calendar extends Component<CalendarProps, CalendarState> {
     return (
       <div className="calendar__container">
         <div className="main">
-          <div className="left-nav"></div>
+          <LeftNavigation
+            curQuater={this.props.curQuater}
+            changeQuater={this.props.changeQuater}
+            quaterList={this.props.quaterList}
+          ></LeftNavigation>
           <div className="calendar">{cal}</div>
           <RightNavigation
             lectures={this.props.data.items}

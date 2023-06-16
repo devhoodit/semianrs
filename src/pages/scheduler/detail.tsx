@@ -108,9 +108,12 @@ class DetailInfo extends Component<DetailInfoProps, any> {
           ></div>
         </div>
         <div className="detail-description">{this.props.data.description}</div>
-        <div className="detail-organizer">{`Opened by @${
-          this.props.data.organizer as string
-        }`}</div>
+        <div className="detail-organizer">
+          Opened by&nbsp;
+          <a href={this.props.data.organizerProfile}>
+            @{this.props.data.organizer}
+          </a>
+        </div>
       </div>
     )
   }

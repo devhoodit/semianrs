@@ -63,24 +63,23 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
   }
 
   render(): React.ReactNode {
-    let controlDropbox = true
     let container: ReactNode
     if (this.state.quaterFetchState === FetchState.Wait) {
-      controlDropbox = false
       container = (
         <div className="fetchstate__container scheduler__container">
           <p className="header">Waiting for fetching quater</p>
         </div>
       )
     } else if (this.state.quaterFetchState === FetchState.Ok) {
-      controlDropbox = true
       container = (
         <Calendar
+          changeQuater={this.changeQuater}
           data={this.state.cachedQuaterData.get(this.state.curQuaterId)}
+          curQuater={this.state.curQuaterId}
+          quaterList={this.props.QuaterIds}
         ></Calendar>
       )
     } else {
-      controlDropbox = true
       container = (
         <div className="fetchstate__container scheduler__container">
           <p className="header">Fail to fetching quater</p>
@@ -92,11 +91,7 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
     }
     return (
       <div className="scheduler__container">
-        <div className="title">
-          Scheduler
-          {/*  */}
-          <div className="dropbox">{controlDropbox ? '' : ''}</div>
-        </div>
+        <div className="title">Scheduler</div>
         {container}
       </div>
     )
