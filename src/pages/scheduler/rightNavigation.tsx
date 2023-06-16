@@ -8,6 +8,8 @@ interface SelectedLecture {
 interface RightNavigationProps {
   lectures: any[]
   selectedLecture: SelectedLecture
+  inFocus: (lectureId: string) => void
+  outFocus: (lectureId: string) => void
   selectedChange: (
     lectureIds: string[],
     selecetedLecture: SelectedLecture
@@ -22,6 +24,8 @@ class RightNavigation extends Component<RightNavigationProps, any> {
         <NavigationItem
           lectureId={lectureId.name as string}
           selectedLecture={this.props.selectedLecture}
+          inFocus={this.props.inFocus}
+          outFocus={this.props.outFocus}
           selectedChange={this.props.selectedChange}
         ></NavigationItem>
       )
@@ -35,6 +39,8 @@ export default RightNavigation
 interface NavigationItemProps {
   lectureId: string
   selectedLecture: SelectedLecture
+  inFocus: (lectureId: string) => void
+  outFocus: (lectureId: string) => void
   selectedChange: (
     lectureIds: string[],
     selecetedLecture: SelectedLecture
@@ -42,6 +48,21 @@ interface NavigationItemProps {
 }
 
 class NavigationItem extends Component<NavigationItemProps, any> {
+  onMouseEnter = (): void => {
+    this.props.selectedLecture.lectureIds
+      .concat([this.props.lectureId.replace(' ', '') + 'zyqo'])
+      .forEach((id) => {
+        this.props.inFocus(id)
+      })
+  }
+
+  onMouseLeave = (): void => {
+    this.props.outFocus(this.props.lectureId.replace(' ', '') + 'zyqo')
+    this.props.selectedLecture.lectureIds.forEach((id) => {
+      this.props.inFocus(id)
+    })
+  }
+
   selectedChange = (): void => {
     this.props.selectedChange(
       [this.props.lectureId.replace(' ', '') + 'zyqo'],
@@ -54,6 +75,8 @@ class NavigationItem extends Component<NavigationItemProps, any> {
       <div
         className="item"
         data-lecture-id={this.props.lectureId.replace(' ', '') + 'zyqo'}
+        onMouseEnter={this.onMouseEnter}
+        onMouseLeave={this.onMouseLeave}
         onClick={this.selectedChange}
       >
         {this.props.lectureId}

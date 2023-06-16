@@ -1,5 +1,5 @@
 import React, { Component, type ReactNode } from 'react'
-import Calender from './calender'
+import Calendar from './calendar'
 import '../../style/scheduler.sass'
 
 interface SchedulerProps {
@@ -75,9 +75,9 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
     } else if (this.state.quaterFetchState === FetchState.Ok) {
       controlDropbox = true
       container = (
-        <Calender
+        <Calendar
           data={this.state.cachedQuaterData.get(this.state.curQuaterId)}
-        ></Calender>
+        ></Calendar>
       )
     } else {
       controlDropbox = true

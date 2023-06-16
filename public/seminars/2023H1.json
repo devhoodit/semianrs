@@ -8,7 +8,8 @@
       "inFocusedColor": "blue",
       "date": ["2023-6-11", "2023-6-21", "2023-6-28", "2023-7-5"],
       "description": "rl seminar description",
-      "organizer": "rl lover"
+      "organizer": "rl lover",
+      "organizerProfile": ""
     },
     {
       "name": "machine learning",
@@ -16,7 +17,8 @@
       "inFocusedColor": "yellow",
       "date": ["2023-7-5"],
       "description": "ml seminar description",
-      "organizer": "ml lover"
+      "organizer": "ml lover",
+      "organizerProfile": ""
     }
   ]
 }

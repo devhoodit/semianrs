@@ -1,12 +1,13 @@
 import { Component, type ReactNode } from 'react'
-import '../../style/calender.sass'
+import '../../style/calendar.sass'
 import RightNavigation from './rightNavigation'
+import Detail from './detail'
 
-interface CalenderProps {
+interface CalendarProps {
   data: any
 }
 
-interface CalenderState {
+interface CalendarState {
   lectureDate: Map<number, string[]>
   colors: Map<string, string[]>
   selectedLectures: string[]
@@ -16,13 +17,16 @@ interface SelectedLecture {
   lectureIds: string[]
 }
 
-class Calender extends Component<CalenderProps, CalenderState> {
-  constructor(prop: CalenderProps) {
+class Calendar extends Component<CalendarProps, CalendarState> {
+  lectureInfoMap: Map<string, any>
+  constructor(prop: CalendarProps) {
     super(prop)
     const lectureDate = new Map<number, string[]>()
     const colors = new Map<string, string[]>()
+    const lectureInfoMap = new Map<string, any>()
     for (const v of prop.data.items) {
       const name = (v.name.replace(' ', '') as string) + 'zyqo'
+      lectureInfoMap.set(name, v)
       v.date.forEach((date: string) => {
         const t = new Date(date)
         const key = t.getTime()
@@ -41,6 +45,7 @@ class Calender extends Component<CalenderProps, CalenderState> {
       colors,
       selectedLectures: [],
     }
+    this.lectureInfoMap = lectureInfoMap
   }
 
   inFocus = (lectureId: string): void => {
@@ -188,27 +193,33 @@ class Calender extends Component<CalenderProps, CalenderState> {
         )
         i++
       }
-      cal.push(<div className="calender-week">{week}</div>)
+      cal.push(<div className="calendar-week">{week}</div>)
     }
 
     return (
-      <div className="calender__container">
+      <div className="calendar__container">
         <div className="main">
           <div className="left-nav"></div>
-          <div className="calender">{cal}</div>
+          <div className="calendar">{cal}</div>
           <RightNavigation
             lectures={this.props.data.items}
             selectedLecture={selectedLecture}
+            inFocus={this.inFocus}
+            outFocus={this.outFocus}
             selectedChange={this.selectedChange}
           ></RightNavigation>
         </div>
-        <div className="detail">a</div>
+
+        <Detail
+          selectedLectures={this.state.selectedLectures}
+          data={this.lectureInfoMap}
+        ></Detail>
       </div>
     )
   }
 }
 
-export default Calender
+export default Calendar
 
 interface SubBorder {
   left?: string[]
@@ -244,16 +255,18 @@ const Day = (prop: DayProps): ReactNode => {
     prop.lectureIds.forEach((lectureId) => {
       prop.outFocus(lectureId)
     })
+    prop.selectedLecture.lectureIds.forEach((id) => {
+      prop.inFocus(id)
+    })
   }
 
   const onClick = (): void => {
     prop.selectedChange(prop.lectureIds, prop.selectedLecture)
-    console.log(prop.selectedLecture)
   }
 
   return (
     <div
-      className={`calender-day border-type-${0}`}
+      className={`calendar-day border-type-${0}`}
       data-right-sub={prop.subBorder.right}
       data-bottom-sub={prop.subBorder.bottom}
       data-lecture-id={prop.lectureIds}
