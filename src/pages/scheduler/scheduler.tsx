@@ -42,6 +42,9 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
         this.setState({
           cachedQuaterData: this.state.cachedQuaterData.set(quaterId, resp),
         })
+        console.log(
+          `fetch https://raw.githubusercontent.com/devhoodit/semianrs/main/public/seminars/${quaterId}.json`
+        )
         return true
       })
       .catch(() => {
@@ -94,7 +97,7 @@ class Scheduler extends Component<SchedulerProps, SchedulerState> {
           {/*  */}
           <div className="dropbox">{controlDropbox ? '' : ''}</div>
         </div>
-        <div className="calender">{container}</div>
+        {container}
       </div>
     )
   }

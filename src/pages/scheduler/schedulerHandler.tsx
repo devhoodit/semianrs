@@ -31,7 +31,7 @@ class SchedulerHandler extends Component<
       .then(async (resp) => await resp.json())
       .then((resp) => {
         this.setState({ quaterList: resp.name })
-        console.log(`fecth ${url}`)
+        console.log(`fetch ${url}`)
         return true
       })
       .catch(() => {
