@@ -97,6 +97,17 @@ interface DetailInfoProps {
 }
 
 const DetailInfo = (props: DetailInfoProps): ReactNode => {
+  let link: ReactNode | undefined
+  if (props.data.link !== undefined) {
+    link = (
+      <div className="link">
+        <a href={props.data.link} target="_blank" rel="noreferrer">
+          Link
+        </a>
+      </div>
+    )
+  }
+
   return (
     <div className="detail-slide">
       <div className="detail-title">
@@ -107,10 +118,15 @@ const DetailInfo = (props: DetailInfoProps): ReactNode => {
         ></div>
       </div>
 
-      <div className="detail-description">{props.data.description}</div>
+      <div className="detail-description">
+        <p>{props.data.description}</p>
+      </div>
+      {link}
       <div className="detail-organizer">
         Opened by&nbsp;
-        <a href={props.data.organizerProfile}>@{props.data.organizer}</a>
+        <a href={props.data.organizerProfile} target="_blank" rel="noreferrer">
+          @{props.data.organizer}
+        </a>
       </div>
     </div>
   )

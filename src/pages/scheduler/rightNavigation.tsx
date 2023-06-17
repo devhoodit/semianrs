@@ -36,7 +36,8 @@ interface ItemProps {
 }
 
 const Item = (props: ItemProps): ReactNode => {
-  const preProccessedLectureId = props.lectureId.replace(' ', '') + 'aofhsuivd'
+  const preProccessedLectureId =
+    props.lectureId.replaceAll(' ', '') + 'aofhsuivd'
 
   const onMouseEnter = (): void => {
     props.inFocus(preProccessedLectureId)
@@ -73,7 +74,7 @@ const Item = (props: ItemProps): ReactNode => {
         className="label"
         style={{ background: `${props.inFocusColor}` }}
       ></div>
-      {props.lectureId}
+      <div className="name">{props.lectureId}</div>
     </div>
   )
 }
