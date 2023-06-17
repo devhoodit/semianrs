@@ -1,35 +1,28 @@
 {
-  "start": "2023-6-14",
-  "end": "2023-8-14",
+  "start": "2023-6-11",
+  "end": "2023-9-4",
   "items": [
     {
-      "name": "reinforce",
-      "outFocusedColor": "red",
-      "inFocusedColor": "blue",
-      "date": ["2023-6-11", "2023-6-21", "2023-6-28", "2023-7-5"],
-      "description": "rl seminar description",
-      "organizer": "rl lover",
-      "organizerProfile": "localhost",
-      "link": "localhost",
-      "type": "public"
+      "name": "Git & Github Tutorial",
+      "outFocusedColor": "#c238384c",
+      "inFocusedColor": "#c23838",
+      "date": ["2023-6-7"],
+      "description": "Short lecture how to use git and github",
+      "organizer": "moordo91",
+      "organizerProfile": "https://github.com/moordo91",
+      "link": "",
+      "type": "private"
     },
     {
-      "name": "machine learning",
-      "outFocusedColor": "green",
-      "inFocusedColor": "yellow",
-      "date": ["2023-7-5"],
-      "description": "ml seminar description",
-      "organizer": "ml lover",
-      "organizerProfile": ""
-    },
-    {
-      "name": "machine learning and deeplearning basic with pytorch and numpy",
-      "outFocusedColor": "green",
-      "inFocusedColor": "yellow",
-      "date": ["2023-7-16"],
-      "description": "Talk about machine learning and deep learning, we will use pytorch and numpy Talk about machine learning and deep learning, we will use pytorch and numpy Talk about machine learning and deep learning, we will use pytorch and numpy",
-      "organizer": "ml lover",
-      "organizerProfile": ""
+      "name": "Reinforcement Learning I",
+      "outFocusedColor": "#38c2844c",
+      "inFocusedColor": "#38c284",
+      "date": ["2023-6-21"],
+      "description": "",
+      "organizer": "devhoodit",
+      "organizerProfile": "https://github.com/devhoodit",
+      "link": "",
+      "type": "private"
     }
   ]
 }

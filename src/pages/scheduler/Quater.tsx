@@ -58,6 +58,7 @@ export const Quater = (props: QuaterProps): ReactNode => {
   if (fetchState === FetchState.WAIT) {
     return (
       <div className="schedule__container">
+        <div className="quater__container">{quaterItems}</div>
         <div className="fetch-waiting">
           <p className="header">Loading Quater Data...</p>
           <p>Try to fetching Quater data from {curQuaterId}</p>
@@ -77,6 +78,7 @@ export const Quater = (props: QuaterProps): ReactNode => {
   } else {
     return (
       <div className="schedule__container">
+        <div className="quater__container">{quaterItems}</div>
         <div className="fetch-fail">
           <p className="header">Fail to load Schedule</p>
           <p>Sorry for error, please refreshing to try again</p>
