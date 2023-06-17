@@ -1,59 +1,61 @@
-import { Component, useState, type ReactNode, useEffect } from 'react'
-import '../../style/detail.sass'
+import { useState, type ReactNode, useEffect } from 'react'
+import '../../style/Detail.sass'
 
 interface DetailProps {
-  selectedLectures: string[]
+  selectedLectureIds: string[]
   data: Map<string, any>
 }
 
-const Detail = (props: DetailProps): ReactNode => {
-  const [indexState, setIndexState] = useState(0)
+export const Detail = (props: DetailProps): ReactNode => {
+  const [pageIndex, setPageIndex] = useState(0)
   const detailSlides: ReactNode[] = []
-  const length = props.selectedLectures.length
+  const length = props.selectedLectureIds.length
 
-  const onLeftClick = (): void => {
-    setIndexState((prev) => prev - 1)
+  const pageUp = (): void => {
+    setPageIndex((prev) => prev - 1)
   }
-  const onRightClick = (): void => {
-    setIndexState((prev) => prev + 1)
+
+  const pageDown = (): void => {
+    setPageIndex((prev) => prev + 1)
   }
 
   useEffect(() => {
-    setIndexState(0)
-  }, [props.selectedLectures])
+    setPageIndex(0)
+  }, [props.selectedLectureIds])
 
-  for (const value of props.selectedLectures) {
-    detailSlides.push(<DetailInfo data={props.data.get(value)}></DetailInfo>)
-  }
-  if (props.selectedLectures.length <= 0) {
+  props.selectedLectureIds.forEach((lectureId) => {
+    detailSlides.push(
+      <DetailInfo data={props.data.get(lectureId)}></DetailInfo>
+    )
+  })
+
+  if (props.selectedLectureIds.length <= 0) {
     return (
-      <div className="detail__container">
-        <div className="detail__container-guide">
-          Click calendar to see detail information
-        </div>
+      <div className="calendar-detail">
+        <div className="guide">Click calendar to see detail information</div>
       </div>
     )
   }
-  console.log(indexState)
+
   return (
-    <div className="detail__container">
+    <div className="calendar-detail">
       <div
-        className="detail__slider"
+        className="calendar-detail-slider"
         style={{
           transform:
             length === 1
               ? ''
-              : `translateY(-${(100 * indexState) / (length - 1)}%)`,
+              : `translateY(-${(100 * pageIndex) / (length - 1)}%)`,
         }}
       >
         {detailSlides}
       </div>
-      <div className="detail-button__container">
+      <div className="calendar-detail-button__container">
         <button
-          className={`left-button detail-button ${
-            indexState <= 0 ? 'button-disable' : 'button-enable'
+          className={`up ${
+            pageIndex <= 0 ? 'button-disable' : 'button-enable'
           }`}
-          onClick={indexState <= 0 ? undefined : onLeftClick}
+          onClick={pageIndex <= 0 ? undefined : pageUp}
         >
           <div>
             <svg
@@ -68,10 +70,10 @@ const Detail = (props: DetailProps): ReactNode => {
           </div>
         </button>
         <button
-          className={`right-button detail-button ${
-            indexState < length - 1 ? 'button-enable' : 'button-disable'
+          className={`down ${
+            pageIndex < length - 1 ? 'button-enable' : 'button-disable'
           }`}
-          onClick={indexState < length - 1 ? onRightClick : undefined}
+          onClick={pageIndex < length - 1 ? pageDown : undefined}
         >
           <div>
             <svg
@@ -90,31 +92,26 @@ const Detail = (props: DetailProps): ReactNode => {
   )
 }
 
-export default Detail
-
 interface DetailInfoProps {
   data: any
 }
 
-class DetailInfo extends Component<DetailInfoProps, any> {
-  render(): ReactNode {
-    return (
-      <div className="detail-slide">
-        <div className="detail-title">
-          {this.props.data.name}
-          <div
-            className="detail-sepbar"
-            style={{ backgroundColor: this.props.data.inFocusedColor }}
-          ></div>
-        </div>
-        <div className="detail-description">{this.props.data.description}</div>
-        <div className="detail-organizer">
-          Opened by&nbsp;
-          <a href={this.props.data.organizerProfile}>
-            @{this.props.data.organizer}
-          </a>
-        </div>
+const DetailInfo = (props: DetailInfoProps): ReactNode => {
+  return (
+    <div className="detail-slide">
+      <div className="detail-title">
+        {props.data.name}
+        <div
+          className="detail-sepbar"
+          style={{ backgroundColor: props.data.inFocusedColor }}
+        ></div>
       </div>
-    )
-  }
+
+      <div className="detail-description">{props.data.description}</div>
+      <div className="detail-organizer">
+        Opened by&nbsp;
+        <a href={props.data.organizerProfile}>@{props.data.organizer}</a>
+      </div>
+    </div>
+  )
 }

@@ -19,6 +19,15 @@
       "description": "ml seminar description",
       "organizer": "ml lover",
       "organizerProfile": ""
+    },
+    {
+      "name": "machine learning and deeplearning basic with pytorch and numpy",
+      "outFocusedColor": "green",
+      "inFocusedColor": "yellow",
+      "date": ["2023-7-16"],
+      "description": "Talk about machine learning and deep learning, we will use pytorch and numpy Talk about machine learning and deep learning, we will use pytorch and numpy Talk about machine learning and deep learning, we will use pytorch and numpy",
+      "organizer": "ml lover",
+      "organizerProfile": ""
     }
   ]
 }

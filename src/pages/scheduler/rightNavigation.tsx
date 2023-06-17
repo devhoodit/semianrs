@@ -1,86 +1,79 @@
-import { Component, type ReactNode } from 'react'
-import '../../style/rightNavigation.sass'
+import { type ReactNode } from 'react'
+import '../../style/RightNavigation.sass'
 
-interface SelectedLecture {
-  lectureIds: string[]
-}
-
-interface RightNavigationProps {
-  lectures: any[]
-  selectedLecture: SelectedLecture
+interface RightNaviationProps {
+  data: any
+  selectedLectureIds: string[]
   inFocus: (lectureId: string) => void
   outFocus: (lectureId: string) => void
-  selectedChange: (
-    lectureIds: string[],
-    selecetedLecture: SelectedLecture
-  ) => void
+  selectedChange: (lectureIds: string[], selectedLectureIds: string[]) => void
 }
 
-class RightNavigation extends Component<RightNavigationProps, any> {
-  render(): ReactNode {
-    const row: ReactNode[] = []
-    for (const lectureId of this.props.lectures) {
-      row.push(
-        <NavigationItem
-          lectureId={lectureId.name as string}
-          selectedLecture={this.props.selectedLecture}
-          inFocus={this.props.inFocus}
-          outFocus={this.props.outFocus}
-          selectedChange={this.props.selectedChange}
-        ></NavigationItem>
-      )
-    }
-    return <div className="right-nav">{row}</div>
-  }
+export const RightNaviation = (props: RightNaviationProps): ReactNode => {
+  const row: ReactNode[] = []
+  props.data.items.forEach((item: any) => {
+    row.push(
+      <Item
+        lectureId={item.name}
+        selectedLectureIds={props.selectedLectureIds}
+        inFocusColor={item.inFocusedColor}
+        inFocus={props.inFocus}
+        outFocus={props.outFocus}
+        selectedChange={props.selectedChange}
+      ></Item>
+    )
+  })
+  return <div className="calendar-right-nav">{row}</div>
 }
 
-export default RightNavigation
-
-interface NavigationItemProps {
+interface ItemProps {
   lectureId: string
-  selectedLecture: SelectedLecture
+  selectedLectureIds: string[]
+  inFocusColor: string
   inFocus: (lectureId: string) => void
   outFocus: (lectureId: string) => void
-  selectedChange: (
-    lectureIds: string[],
-    selecetedLecture: SelectedLecture
-  ) => void
+  selectedChange: (lectureIds: string[], selectedLectureIds: string[]) => void
 }
 
-class NavigationItem extends Component<NavigationItemProps, any> {
-  onMouseEnter = (): void => {
-    this.props.selectedLecture.lectureIds
-      .concat([this.props.lectureId.replace(' ', '') + 'zyqo'])
-      .forEach((id) => {
-        this.props.inFocus(id)
-      })
-  }
+const Item = (props: ItemProps): ReactNode => {
+  const preProccessedLectureId = props.lectureId.replace(' ', '') + 'aofhsuivd'
 
-  onMouseLeave = (): void => {
-    this.props.outFocus(this.props.lectureId.replace(' ', '') + 'zyqo')
-    this.props.selectedLecture.lectureIds.forEach((id) => {
-      this.props.inFocus(id)
+  const onMouseEnter = (): void => {
+    props.inFocus(preProccessedLectureId)
+    props.selectedLectureIds.forEach((lectureId) => {
+      props.inFocus(lectureId)
     })
   }
 
-  selectedChange = (): void => {
-    this.props.selectedChange(
-      [this.props.lectureId.replace(' ', '') + 'zyqo'],
-      this.props.selectedLecture
-    )
+  const onMouseLeave = (): void => {
+    props.outFocus(preProccessedLectureId)
+    props.selectedLectureIds.forEach((lectureId) => {
+      props.inFocus(lectureId)
+    })
   }
 
-  render(): ReactNode {
-    return (
-      <div
-        className="item"
-        data-lecture-id={this.props.lectureId.replace(' ', '') + 'zyqo'}
-        onMouseEnter={this.onMouseEnter}
-        onMouseLeave={this.onMouseLeave}
-        onClick={this.selectedChange}
-      >
-        {this.props.lectureId}
-      </div>
+  const onClick = (): void => {
+    if (
+      props.selectedLectureIds.length === 1 &&
+      props.selectedLectureIds[0] === props.lectureId
     )
+      return
+    props.selectedChange([preProccessedLectureId], props.selectedLectureIds)
   }
+
+  return (
+    <div
+      className="item"
+      data-lecture-id={preProccessedLectureId}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      onClick={onClick}
+    >
+      <div
+        className="label"
+        style={{ background: `${props.inFocusColor}` }}
+      ></div>
+      {props.lectureId}
+    </div>
+  )
 }

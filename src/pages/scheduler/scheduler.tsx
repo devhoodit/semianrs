@@ -1,101 +1,59 @@
-import React, { Component, type ReactNode } from 'react'
-import Calendar from './calendar'
-import '../../style/scheduler.sass'
+import { useState, type ReactNode, useEffect } from 'react'
+import '../../style/Scheduler.sass'
 
-interface SchedulerProps {
-  QuaterIds: string[]
-}
+import { Quater } from './Quater'
+
+// this component will manage fetching QuaterList
 
 enum FetchState {
-  Wait,
-  Ok,
-  Fail,
+  WAIT,
+  OK,
+  FAIL,
 }
 
-interface SchedulerState {
-  curQuaterId: string
-  cachedQuaterData: Map<string, any>
-  quaterFetchState: FetchState
+interface SchedulerProps {
+  quaterIdsURL: string
 }
 
-class Scheduler extends Component<SchedulerProps, SchedulerState> {
-  constructor(props: SchedulerProps) {
-    super(props)
-    this.state = {
-      curQuaterId: props.QuaterIds[0],
-      cachedQuaterData: new Map<string, any>(),
-      quaterFetchState: FetchState.Wait,
-    }
-  }
-
-  componentDidMount(): void {
-    this.changeQuater(this.state.curQuaterId)
-  }
-
-  async fetchQuater(quaterId: string): Promise<boolean> {
-    this.setState({ quaterFetchState: FetchState.Wait })
-    return await fetch(
-      `https://raw.githubusercontent.com/devhoodit/semianrs/main/public/seminars/${quaterId}.json`
-    )
-      .then(async (resp) => await resp.json())
+export const Schedule = (props: SchedulerProps): ReactNode => {
+  const [fetchState, setFetchState] = useState(FetchState.WAIT)
+  const [quaterIds, setQuaterIds] = useState([])
+  useEffect(() => {
+    fetch(props.quaterIdsURL)
+      .then(async (resp) => {
+        return await resp.json()
+      })
       .then((resp) => {
-        this.setState({
-          cachedQuaterData: this.state.cachedQuaterData.set(quaterId, resp),
-        })
-        console.log(
-          `fetch https://raw.githubusercontent.com/devhoodit/semianrs/main/public/seminars/${quaterId}.json`
-        )
-        return true
+        setQuaterIds(resp.name)
+        setFetchState(FetchState.OK)
       })
       .catch(() => {
-        return false
+        setFetchState(FetchState.FAIL)
       })
-  }
+  }, [])
 
-  changeQuater(quaterId: string): void {
-    if (this.state.cachedQuaterData.has(quaterId)) {
-      this.setState({ curQuaterId: quaterId, quaterFetchState: FetchState.Ok })
-    }
-    this.setState({ curQuaterId: quaterId, quaterFetchState: FetchState.Wait })
-    void this.fetchQuater(quaterId).then(() => {
-      this.setState({ quaterFetchState: FetchState.Ok })
-    })
-  }
-
-  render(): React.ReactNode {
-    let container: ReactNode
-    if (this.state.quaterFetchState === FetchState.Wait) {
-      container = (
-        <div className="fetchstate__container scheduler__container">
-          <p className="header">Waiting for fetching quater</p>
-        </div>
-      )
-    } else if (this.state.quaterFetchState === FetchState.Ok) {
-      container = (
-        <Calendar
-          changeQuater={this.changeQuater}
-          data={this.state.cachedQuaterData.get(this.state.curQuaterId)}
-          curQuater={this.state.curQuaterId}
-          quaterList={this.props.QuaterIds}
-        ></Calendar>
-      )
-    } else {
-      container = (
-        <div className="fetchstate__container scheduler__container">
-          <p className="header">Fail to fetching quater</p>
-          <p>Sorry, loading quater failed</p>
-          <p>You can see other quaters</p>
-          <p>If you want some help, please contact to us</p>
-        </div>
-      )
-    }
+  if (fetchState === FetchState.WAIT) {
+    // wait
     return (
-      <div className="scheduler__container">
-        <div className="title">Scheduler</div>
-        {container}
+      <div className="schedule__container">
+        <div className="fetch-waiting">
+          <p className="header">Loading Schedule...</p>
+          <p>Try to fetching Quater Ids from {props.quaterIdsURL}</p>
+          <p>Please wait patiently</p>
+        </div>
+      </div>
+    )
+  } else if (fetchState === FetchState.OK) {
+    return <Quater QuaterIds={quaterIds}></Quater>
+  } else {
+    return (
+      <div className="schedule__container">
+        <div className="fetch-fail">
+          <p className="header">Fail to load Schedule</p>
+          <p>Sorry for error, please refreshing to try again</p>
+          <p>If same error occurs, please contact us</p>
+        </div>
       </div>
     )
   }
 }
-
-export default Scheduler

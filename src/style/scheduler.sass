@@ -1,44 +1,29 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.7/dist/web/static/pretendard.css")
-    
-*
-    box-sizing: border-box
+@import '../color'
 
-.scheduler__container
+.schedule__container
+    position: relative
+    font-family: Pretendard
+
+    width: 1000px
+    height: 696px
     display: flex
-    flex-direction: column
-    .title
-        height: 34px
-        display: flex
-        flex-direction: row
-        font-size: 24px
-        color: white
-        .dropbox
-            position: relative
+    flex-direction: row
+    color: $color
+    border: solid 2px $color
+    padding-left: 120px
 
-    .calendar__container
-        max-width: 1000px
-        max-height: 700px
-        width: 70vw
-        height: 70vh
-        font-family: Pretendard
-        color: white
-        display: flex
-        flex-direction: column
-        background-color: #202020
-        border: 2px solid white
-
-.fetchstate__container
+.fetch-waiting, .fetch-fail
     width: 100%
     height: 100%
     display: flex
     flex-direction: column
     justify-content: center
     align-items: center
-    .header
-        font-size: 48px
-        color: white
+
     p
         font-size: 24px
-        color: white
 
-
+        .header
+            font-size: 32px
+            font-weight: 600
