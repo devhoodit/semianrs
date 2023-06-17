@@ -9,7 +9,9 @@
       "date": ["2023-6-11", "2023-6-21", "2023-6-28", "2023-7-5"],
       "description": "rl seminar description",
       "organizer": "rl lover",
-      "organizerProfile": ""
+      "organizerProfile": "localhost",
+      "link": "localhost",
+      "type": "public"
     },
     {
       "name": "machine learning",

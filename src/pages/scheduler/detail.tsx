@@ -98,11 +98,38 @@ interface DetailInfoProps {
 
 const DetailInfo = (props: DetailInfoProps): ReactNode => {
   let link: ReactNode | undefined
-  if (props.data.link !== undefined) {
+
+  if (props.data.link !== undefined && props.data.link !== '') {
+    console.log('make link')
     link = (
-      <div className="link">
+      <div className="detail-link">
         <a href={props.data.link} target="_blank" rel="noreferrer">
           Link
+        </a>
+      </div>
+    )
+  }
+  let organizerProfile: ReactNode | undefined
+  if (
+    props.data.organizerProfile !== null &&
+    props.data.organizerProfile === ''
+  ) {
+    organizerProfile = (
+      <div className="detail-organizer">
+        Opened {props.data.type} by @{props.data.organizer}
+      </div>
+    )
+  } else {
+    organizerProfile = (
+      <div className="detail-organizer">
+        Opened {props.data.type} by&nbsp;
+        <a
+          className="link"
+          href={props.data.organizerProfile}
+          target="_blank"
+          rel="noreferrer"
+        >
+          @{props.data.organizer}
         </a>
       </div>
     )
@@ -122,12 +149,7 @@ const DetailInfo = (props: DetailInfoProps): ReactNode => {
         <p>{props.data.description}</p>
       </div>
       {link}
-      <div className="detail-organizer">
-        Opened by&nbsp;
-        <a href={props.data.organizerProfile} target="_blank" rel="noreferrer">
-          @{props.data.organizer}
-        </a>
-      </div>
+      {organizerProfile}
     </div>
   )
 }
