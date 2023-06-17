@@ -4,7 +4,7 @@ import { Schedule } from './Scheduler'
 export const SchedulerPage = (): ReactNode => {
   return (
     <section>
-      <Schedule quaterIdsURL="https://raw.githubusercontent.com/devhoodit/semianrs/main/public/seminars/seminar.json"></Schedule>
+      <Schedule quaterIdsURL="https://raw.githubusercontent.com/stnuc/seminars/main/data/seminar.json"></Schedule>
     </section>
   )
 }

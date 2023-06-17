@@ -25,7 +25,7 @@ export const Quater = (props: QuaterProps): ReactNode => {
     if (!cachedQuater.has(quaterId)) {
       setFetchState(FetchState.WAIT)
       fetch(
-        `https://raw.githubusercontent.com/devhoodit/semianrs/main/public/seminars/${quaterId}.json`
+        `https://raw.githubusercontent.com/stnuc/seminars/main/data/data/${quaterId}.json`
       )
         .then(async (resp) => {
           return await resp.json()
