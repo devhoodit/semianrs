@@ -1,0 +1,28 @@
+{
+  "start": "2023-6-4",
+  "end": "2023-9-4",
+  "items": [
+    {
+      "name": "Git & Github Tutorial",
+      "outFocusedColor": "#c238384c",
+      "inFocusedColor": "#c23838",
+      "date": ["2023-6-7"],
+      "description": "Short lecture how to use git and github",
+      "organizer": "moordo91",
+      "organizerProfile": "https://github.com/moordo91",
+      "link": "",
+      "type": "private"
+    },
+    {
+      "name": "Reinforcement Learning I",
+      "outFocusedColor": "#38c2844c",
+      "inFocusedColor": "#38c284",
+      "date": ["2023-6-21"],
+      "description": "",
+      "organizer": "devhoodit",
+      "organizerProfile": "https://github.com/devhoodit",
+      "link": "",
+      "type": "private"
+    }
+  ]
+}

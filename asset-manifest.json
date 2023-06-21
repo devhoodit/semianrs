@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/seminar/static/css/main.852806c1.css",
+    "main.js": "/seminar/static/js/main.903574c2.js",
+    "static/js/787.64586c86.chunk.js": "/seminar/static/js/787.64586c86.chunk.js",
+    "index.html": "/seminar/index.html",
+    "main.852806c1.css.map": "/seminar/static/css/main.852806c1.css.map",
+    "main.903574c2.js.map": "/seminar/static/js/main.903574c2.js.map",
+    "787.64586c86.chunk.js.map": "/seminar/static/js/787.64586c86.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.852806c1.css",
+    "static/js/main.903574c2.js"
+  ]
+}
