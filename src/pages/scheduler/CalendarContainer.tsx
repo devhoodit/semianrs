@@ -32,7 +32,8 @@ export const CalendarContainer = (props: CalendarContainerProps): ReactNode => {
   const lectureInfo = new Map<string, any>()
 
   for (const v of props.data.items) {
-    const name = (v.name as string).replaceAll(' ', '') + 'aofhsuivd'
+    const name =
+      (v.name as string).replaceAll(' ', '').replaceAll('&', '') + 'aofhsuivd'
     lectureInfo.set(name, v)
     v.date.forEach((date: string) => {
       const t = new Date(date)

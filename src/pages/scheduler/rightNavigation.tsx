@@ -37,7 +37,7 @@ interface ItemProps {
 
 const Item = (props: ItemProps): ReactNode => {
   const preProccessedLectureId =
-    props.lectureId.replaceAll(' ', '') + 'aofhsuivd'
+    props.lectureId.replaceAll(' ', '').replaceAll('&', '') + 'aofhsuivd'
 
   const onMouseEnter = (): void => {
     props.inFocus(preProccessedLectureId)
